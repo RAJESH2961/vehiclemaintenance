@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %} Vehicle Management System{% endblock title %}
+
+{% block css %}
+{% load static %}
+<style>
+    /* General Page Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+    }
+
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 2em;
+        color: #ff5733 !important;
+    }
+
+    /* Table Styles */
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    /* Styling for the Empty Message */
+    .empty-message {
+        text-align: center;
+        font-size: 1.2em;
+        color: #777;
+        padding: 20px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        table {
+            width: 95%;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Customers to Be Notified About Upcoming Service</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Vehicle License Plate</th>
+            <th>Vehicle Type</th>
+            <th>Last Service Date</th>
+            <th>Next Service Due Date</th>
+            <th>Contact Number</th>
+            <th>Call</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.customer_name }}</td>
+            <td>{{ customer.license_plate }}</td>
+            <td>{{ customer.vehicle_type }}</td>
+            <td>{{ customer.last_service_date }}</td>
+            <td>{{ customer.next_service_due_date }}</td>
+
+            <td>{{ customer.mobile_number }}</td>
+            <td><a href="tel:+{{ customer.mobile_number }}"><i class="fa fa-phone"
+                        style="font-size:28px;color:blue;"></i></a></i></td>
+            <!-- <td></td> -->
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="empty-message">No customers need to be notified within the next 3 days.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<h1>Customers to Be Notified to take a Feedback</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Mobile Number</th>
+            <th>Vehicle License Plate</th>
+            <th>Vehicle Type</th>
+            <th>Mechanic Name</th>
+            <th>Service Date</th>
+            <th>Description</th>
+            <th>Number</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customers in customer_remind_info %}
+        <tr>
+            <td>{{ customers.customer_name }}</td>
+            <td>{{ customers.mobile_number }}</td>
+            <td>{{ customers.license_plate }}</td>
+            <td>{{ customers.vehicle_type }}</td>
+            <td>{{ customers.mechanic_name }}</td>
+            <td>{{ customers.service_date }}</td>
+            <td>{{ customers.description }}</td>
+            <td><a href="tel:+{{ customer.mobile_number }}"><i class="fa fa-phone"
+                        style="font-size:28px;color:blue;"></i></a></i></td>
+            <!-- <td>{{ customer.email }}</td> -->
+
+
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="empty-message">No customers need to be notified within the next 3 days.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

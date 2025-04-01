@@ -1,0 +1,3 @@
+1 add email for Customer and send feedback form automatically once the user serviced the vehicle
+2 once customer has serviced the vehicle send an email to the customer that vehicle has serviced and mechanic name and those dtails along with Feed back form
+3 
